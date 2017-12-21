@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.ptj.dao.XlfPartTimeJobDao">
+
+	<resultMap id="BaseResultMap"
+		type="com.thinkgem.jeesite.modules.ptj.entity.XlfPartTimeJob">
+		<id column="job_id" property="jobId" jdbcType="INTEGER" />
+		<result column="job_name" property="jobName" jdbcType="VARCHAR" />
+		<result column="limit_number" property="limitNumber" jdbcType="INTEGER" />
+		<result column="sex_demand" property="sexDemand" jdbcType="VARCHAR" />
+		<result column="job_type_id" property="jobTypeId" jdbcType="INTEGER" />
+		<result column="wage" property="wage" jdbcType="DECIMAL" />
+		<result column="wage_type" property="wageType" jdbcType="VARCHAR" />
+		<result column="work_street" property="workStreet" jdbcType="VARCHAR" />
+		<result column="calculate_money_type" property="calculateMoneyType"
+			jdbcType="VARCHAR" />
+		<result column="calculate_money_date" property="calculateMoneyDate"
+			jdbcType="VARCHAR" />
+		<result column="time_type" property="workStreet" jdbcType="VARCHAR" />
+		<result column="release_time" property="releaseTime" jdbcType="TIMESTAMP" />
+		<result column="end_work_date" property="endWorkDate" jdbcType="TIMESTAMP" />
+		<result column="start_work_date" property="startWorkDate"
+			jdbcType="TIMESTAMP" />
+		<result column="job_content" property="jobContent" jdbcType="VARCHAR" />
+		<result column="audit_status" property="auditStatus" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="area_id" property="areaId" jdbcType="INTEGER" />
+		<result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+		<result column="work_time" property="workTime" jdbcType="VARCHAR" />
+		<result column="latitude" property="latitude" jdbcType="DOUBLE" />
+		<result column="longitude" property="longitude" jdbcType="DOUBLE" />
+		<result column="work_province" property="workProvince" jdbcType="VARCHAR" />
+		<result column="work_city" property="workCity" jdbcType="VARCHAR" />
+		<result column="work_district" property="workDistrict" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<select id="get" resultType="XlfPartTimeJob">
+		SELECT
+		*
+		FROM xlf_part_time_job a
+		WHERE job_id = #{jobId}
+	</select>
+
+	<select id="findList" resultType="XlfPartTimeJob">
+		SELECT p.*,u.user_name as userName,u.user_company as userCompany,
+		u.user_role AS userRole,s.school_name AS schoolName,
+		t.job_type as jobType
+		FROM xlf_part_time_job p
+		left join xlf_user u
+		on p.user_id =u.id
+		left join xlf_school s
+		on u.user_school_id = s.id
+		left join xlf_ptj_type t
+		on p.job_type_id = t.id
+		<where>
+			<if test="jobName != null and jobName != ''">
+				p.job_name like '%${jobName}%'
+			</if>
+			<if test="userId != 0">
+				and p.user_id = #{userId}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="findAllList" resultType="XlfPartTimeJob">
+		SELECT *
+		FROM xlf_part_time_job a
+		<where>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+
+	<insert id="insert"  useGeneratedKeys="true" keyProperty="jobId">
+		INSERT INTO xlf_part_time_job
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="jobName != null">
+				job_name,
+			</if>
+			<if test="limitNumber != null">
+				limit_number,
+			</if>
+			<if test="sexDemand != null">
+				sex_demand,
+			</if>
+			<if test="jobTypeId != null">
+				job_type_id,
+			</if>
+			<if test="wage != null">
+				wage,
+			</if>
+			<if test="wageType != null">
+				wage_type,
+			</if>
+			<if test="workStreet != null">
+				work_street,
+			</if>
+			<if test="calculateMoneyType != null">
+				calculate_money_type,
+			</if>
+			<if test="calculateMoneyDate!= null">
+				calculate_money_date,
+			</if>
+			<if test="timeType != null">
+				time_type,
+			</if>
+			<if test="releaseTime != null">
+				release_time,
+			</if>
+			<if test="endWorkDate != null">
+				end_work_date,
+			</if>
+			<if test="startWorkDate != null">
+				start_work_date,
+			</if>
+			<if test="jobContent != null">
+				job_content,
+			</if>
+			<if test="auditStatus !=null">
+				audit_status,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="areaId != null">
+				area_id,
+			</if>
+			<if test="delFlag != null">
+				del_flag,
+			</if>
+			<if test="workTime != null">
+				work_time,
+			</if>
+			<if test="longitude != null">
+				longitude,
+			</if>
+			<if test="latitude != null">
+				latitude,
+			</if>
+			<if test="workProvince != null">
+				work_province,
+			</if>
+			<if test="workCity != null">
+				work_city,
+			</if>
+			<if test="workDistrict != null">
+				work_district,
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="jobName != null">
+				#{jobName},
+			</if>
+			<if test="limitNumber != null">
+				#{limitNumber},
+			</if>
+			<if test="sexDemand != null">
+				#{sexDemand},
+			</if>
+			<if test="jobTypeId != null">
+				#{jobTypeId},
+			</if>
+			<if test="wage != null">
+				#{wage},
+			</if>
+			<if test="wageType != null">
+				#{wageType},
+			</if>
+			<if test="workStreet != null">
+				#{workStreet},
+			</if>
+			<if test="calculateMoneyType != null">
+				#{calculateMoneyType},
+			</if>
+			<if test="calculateMoneyDate!= null">
+				#{calculateMoneyDate},
+			</if>
+			<if test="timeType != null">
+				#{timeType},
+			</if>
+			<if test="releaseTime != null">
+				#{releaseTime},
+			</if>
+			<if test="endWorkDate != null">
+				#{endWorkDate},
+			</if>
+			<if test="startWorkDate != null">
+				#{startWorkDate},
+			</if>
+			<if test="jobContent != null">
+				#{jobContent},
+			</if>
+			<if test="auditStatus !=null">
+				#{auditStatus},
+			</if>
+			<if test="userId != null">
+				#{userId},
+			</if>
+			<if test="areaId != null">
+				#{areaId},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag},
+			</if>
+			<if test="workTime != null">
+				#{workTime},
+			</if>
+
+			<if test="longitude != null">
+				#{longitude},
+			</if>
+
+			<if test="latitude != null">
+				#{latitude},
+			</if>
+			<if test="workProvince != null">
+				#{workProvince},
+			</if>
+			<if test="workCity != null">
+				#{workCity},
+			</if>
+			<if test="workDistrict != null">
+				#{workDistrict},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="update">
+		UPDATE xlf_part_time_job 
+		<set>
+			<if test="jobName != null">
+				job_name = #{jobName},
+			</if>
+			<if test="limitNumber != null">
+				limit_number = #{limitNumber},
+			</if>
+			<if test="sexDemand != null">
+				sex_demand = #{sexDemand},
+			</if>
+			<if test="jobTypeId != null">
+				job_type_id = #{jobTypeId},
+			</if>
+			<if test="wage != null">
+				wage = #{wage},
+			</if>
+			<if test="wageType != null">
+				wage_type =#{wageType},
+			</if>
+			<if test="workStreet != null">
+				work_street=#{workStreet},
+			</if>
+			<if test="calculateMoneyType != null">
+				calculate_money_type=#{calculateMoneyType},
+			</if>
+			<if test="calculateMoneyDate!= null">
+				calculate_money_date=#{calculateMoneyDate},
+			</if>
+			<if test="timeType != null">
+				time_type= #{timeType},
+			</if>
+			<if test="releaseTime != null">
+				release_time = #{releaseTime},
+			</if>
+			<if test="endWorkDate != null">
+				end_work_date = #{endWorkDate},
+			</if>
+			<if test="startWorkDate != null">
+				start_work_date=#{startWorkDate},
+			</if>
+			<if test="jobContent != null">
+				job_content=#{jobContent},
+			</if>
+			<if test="auditStatus !=null">
+				audit_status=#{auditStatus},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId},
+			</if>
+			<if test="areaId != null">
+				area_id = #{areaId},
+			</if>
+			<if test="delFlag != null">
+				del_flag = #{delFlag},
+			</if>
+			<if test="workTime != null">
+				work_time = #{workTime},
+			</if>
+
+			<if test="longitude != null">
+				longitude = #{longitude},
+			</if>
+
+			<if test="latitude != null">
+				latitude = #{latitude},
+			</if>
+			<if test="workProvince != null">
+				work_province = #{workProvince},
+			</if>
+			<if test="workCity != null">
+				work_city = #{workCity},
+			</if>
+			<if test="workDistrict != null">
+				work_district = #{workDistrict},
+			</if>
+			
+		</set>
+		WHERE job_id = #{jobId}
+	</update>
+
+	<update id="delete">
+		delete from xlf_part_time_job
+		WHERE job_id = #{jobId}
+	</update>
+
+	<update id ="updateStatus" parameterType="com.thinkgem.jeesite.modules.ptj.entity.XlfPartTimeJob"	>
+		update xlf_part_time_job a
+		<set>
+			<if test="auditStatus !=null">
+				audit_status=#{auditStatus},
+			</if>
+		</set>
+		WHERE job_id = #{jobId}
+	</update>
+
+</mapper>

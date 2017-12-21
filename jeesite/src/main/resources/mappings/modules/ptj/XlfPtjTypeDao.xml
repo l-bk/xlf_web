@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.ptj.dao.XlfPtjTypeDao">
+    
+	
+	
+	<select id="get" resultType="com.thinkgem.jeesite.modules.ptj.entity.XlfPtjType">
+		SELECT *
+		FROM xlf_ptj_type a
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="com.thinkgem.jeesite.modules.ptj.entity.XlfPtjType">
+		SELECT 
+			*
+		FROM xlf_ptj_type a
+		<where>
+			<if test="jobType != null and jobType != ''">
+				job_type  like  '%${jobType}%'
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="com.thinkgem.jeesite.modules.ptj.entity.XlfPtjType">
+		SELECT 
+			*
+		FROM xlf_ptj_type a
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO xlf_ptj_type
+		<trim  prefix="("  suffix=")" suffixOverrides=",">
+			<if test="jobType != null">
+				job_type,
+			</if> 
+		</trim>
+		<trim prefix="value(" suffix=")"  suffixOverrides=",">
+			#{jobType},
+		</trim>
+	</insert>
+	
+	<update id="update">
+		UPDATE xlf_ptj_type SET 	
+			job_type = #{jobType}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM xlf_ptj_type
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.join.dao.XlfJoinDao">
+  <resultMap id="BaseResultMap" type="com.thinkgem.jeesite.modules.join.entity.XlfJoin">
+  	<id column="id" property="joinId" jdbcType="INTEGER"/>
+  	<id column="methodId" property="moduleType" jdbcType="INTEGER"/>
+  	<id column="actId" property="moduleId" jdbcType="INTEGER"/>
+  	<id column="userId" property="user" jdbcType="INTEGER"/>
+  	<id column="joinTime" property="time" jdbcType="INTEGER"/>
+  	<id column="joinStatus" property="status" jdbcType="INTEGER"/>
+  </resultMap>  
+	<sql id="xlfJoinColumns">
+		a.id AS "joinId",
+		a.methodid AS "moduleType",
+		a.actid AS "moduleId",
+		a.userid AS "user",
+		a.jointime AS "time",
+		a.joinstatus AS "status"
+	</sql>
+	
+    
+	<select id="get" resultType="XlfJoin">
+		SELECT 
+			<include refid="xlfJoinColumns"/>
+		FROM xlf_join a
+		WHERE a.id = #{joinId}
+	</select>
+	
+	<select id="findList" resultType="XlfJoin">
+		SELECT u.user_name AS userName,u.user_company AS userCompany, u.user_sex AS userSex,
+			u.user_phone AS userPhone,u.user_role AS userRole, s.school_name as schoolName,
+			<include refid="xlfJoinColumns"/>
+			<choose>
+				<when test="moduleType == 2">
+					,p.job_name AS ptjName,t.job_type  AS jobType
+				</when>
+				<when test="moduleType == 1">
+					,c.activityName AS actName, c.activityPerson AS actPerson
+				</when>
+			</choose>
+		FROM xlf_join a
+		left join xlf_user u
+		on a.userId = u.id 
+		left join xlf_school s
+		on u.user_school_id = s.id
+		<choose>
+			<when test="moduleType == 2">
+				left join xlf_part_time_job p
+				on a.actId = p.job_id
+				left join xlf_ptj_type t
+				on p.job_type_id = t.id
+			</when>
+			<when test="moduleType ==1">
+				left join xlf_activity c
+				on a.actId = c.id
+			</when>
+		</choose>
+		<where>
+			<if test="moduleId != null">
+				a.actId = #{moduleId}
+			</if>
+			<if test="user != null">
+				and userId = #{user}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="XlfJoin">
+		SELECT 
+		<include refid="xlfJoinColumns"/>
+		FROM xlf_join a
+		<where>
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert" useGeneratedKeys="true" keyColumn="id">
+		INSERT INTO xlf_join
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="moduleType != null">
+				methodId,
+			</if>
+			<if test="moduleId != null">
+				actId,
+			</if>
+			<if test="user != null">
+				userId,
+			</if>
+			<if test="time != null">
+				joinTime,
+			</if>
+			<if test="status != null">
+				joinStatus,
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="moduleType != null">
+				#{methodId},
+			</if>
+			<if test="moduleId != null">
+				#{actId},
+			</if>
+			<if test="user != null">
+				#{userId},
+			</if>
+			<if test="time != null">
+				#{joinTime},
+			</if>
+			<if test="status != null">
+				#{joinStatus},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="update">
+		UPDATE xlf_join
+		<set>
+			<if test="moduleType != null">
+				methodId = #{moduleType},
+			</if>
+			<if test="moduleId != null">
+				actId = #{moduleId},
+			</if>
+			<if test="user != null">
+				userId = #{user},
+			</if>
+			<if test="time != null">
+				joinTime = #{time},
+			</if>
+			<if test="status != null">
+				joinStatus = #{status},
+			</if>
+		</set>
+		WHERE id = #{joinId}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM xlf_join
+		WHERE id = #{joinId}
+	</update>
+	
+	
+	<select id ="selectCoumnApply" parameterType="com.thinkgem.jeesite.modules.join.entity.XlfJoin" resultType="int">
+		select count(id) FROM xlf_join a 
+		<where>
+			<if test="moduleId != null">
+				a.actId = #{moduleId}
+			</if>
+			<if test="moduleType != null">
+				and a.methodId = #{moduleType}
+			</if>
+			<if test="status != null">
+				and a.joinStatus = #{status}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectByUserAndModule" parameterType="com.thinkgem.jeesite.modules.join.entity.XlfJoin" 
+	resultType="com.thinkgem.jeesite.modules.join.entity.XlfJoin">
+		select  
+		<choose>
+			<when test="moduleType == 1">
+			c.activityName AS actName, c.activityPerson AS actPerson,
+			u.user_name AS userName, u.user_company AS userCompany,
+			u.user_role AS userRole, s.school_name as schoolName,
+			</when>
+			<when test="moduleType == 2">
+			p.job_name AS ptjName, t.job_type AS jobType,
+			u.user_name AS userName, u.user_company AS userCompany,
+			u.user_role AS userRole, s.school_name as schoolName,
+			
+			</when>
+		</choose>
+		<include refid="xlfJoinColumns"/>
+		from xlf_join a
+		
+		<choose>
+			<when test="moduleType == 1">
+				left join xlf_activity c
+				on a.actId = c.id
+				left join xlf_user u
+				on c.activityCreateUser = u.id
+				left join xlf_school s
+				on u.user_school_id = s.id
+			</when>
+			<when test="moduleType == 2">
+				left join xlf_part_time_job p
+				on a.actId = p.job_id
+				
+				left join xlf_ptj_type t
+				on p.job_type_id = t.id
+				
+				left join xlf_user u
+				on u.id = p.user_id 
+				left join xlf_school s
+				on u.user_school_id = s.id
+				
+			</when>
+		</choose>
+		<where>
+			<if test="user != null">
+			 	a.userId = #{user}
+			</if>
+			<if test="moduleType != null">
+				and a.methodId = #{moduleType} 
+			</if>
+			<if test="ptjName != null">
+				and p.job_name like '%${ptjName}%' 
+			</if>
+			<if test="actName != null">
+				and c.activityName like  '%${actName}%'
+			</if>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+		
+	</select>
+</mapper>

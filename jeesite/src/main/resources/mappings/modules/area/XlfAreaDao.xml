@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.area.dao.XlfAreaDao">
+    <resultMap type="com.thinkgem.jeesite.modules.area.entity.XlfArea" id="BaseResultMap">
+    	<id column="area_id" property="areaId" jdbcType="INTEGER"/>
+    	<result column="province" property="province" jdbcType="VARCHAR"/>
+    	<result column="city" property="city" jdbcType="VARCHAR"/>
+    	<result column="district" property="district" jdbcType="VARCHAR"/>
+    	<result column="city_first" property="cityFirst" jdbcType="VARCHAR"/>
+    	<result column="hot_city" property="hotCity" jdbcType="VARCHAR"/>
+    </resultMap>
+	<select id="get" resultType="com.thinkgem.jeesite.modules.area.entity.XlfArea">
+		SELECT 
+			*
+		FROM xlf_area 
+		WHERE area_id = #{areaId}
+	</select>
+	
+	<select id="findList" resultType="com.thinkgem.jeesite.modules.area.entity.XlfArea">
+		SELECT 
+			*
+		FROM xlf_area 
+		<where>
+			<if test="province != null and province != ''">
+				province like '%${province}%'
+			</if>
+			<if test="city != null and city != ''">
+				and city like '%${city}%'
+			</if>
+			<if test="district != null and district != ''">
+				and district like '%${district}%'
+			</if>
+			<if test="cityFirst != null and cityFirst != ''">
+				and city_first = #{cityFirst}
+			</if>
+			<if test="hotCity != null and hotCity != ''">
+				and hot_city = #{hotCity}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="com.thinkgem.jeesite.modules.area.entity.XlfArea">
+		SELECT 
+			*
+		FROM xlf_area a
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO xlf_area
+		<trim prefix="("  suffix=")" suffixOverrides=",">
+			<if test="province != null">
+				province,
+			</if>
+			<if test="city != null">
+				city,
+			</if>
+			<if test="district != null">
+				district,
+			</if>
+			<if test="cityFirst != null">
+				city_first,
+			</if>
+			<if test="hotCity != null">
+				hot_city,
+			</if>
+		</trim>
+		<trim prefix="value(" suffix=")" suffixOverrides=",">
+			<if test="province != null">
+				#{province},
+			</if>
+			<if test="city != null">
+				#{city},
+			</if>
+			<if test="district != null">
+				#{district},
+			</if>
+			<if test="cityFirst != null">
+				#{cityFirst},
+			</if>
+			<if test="hotCity != null">
+				#{hotCity},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="update">
+		UPDATE xlf_area 
+		<set>
+			<if test="province != null and province != ''">
+				province = #{province},
+			</if>
+			<if test="city != null and city != ''">
+				city = #{city},
+			</if>
+			<if test="district != null and district != ''">
+				district = #{district},
+			</if>
+			<if test="cityFirst != null and cityFirst != ''">
+				city_first = #{cityFirst},
+			</if>
+			<if test="hotCity != null and hotCity != ''">
+				hot_city = #{hotCity}
+			</if>
+		</set>
+		WHERE area_id = #{areaId}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM xlf_area
+		WHERE area_id = #{areaId}
+	</delete>
+	
+	<update id="updateByCity">
+		UPDATE xlf_area 
+			<set>
+				<if test="hotCity != null and hotCity != ''">
+					hot_city = #{hotCity}
+				</if>
+			</set>
+			WHERE city = #{city}
+	</update>
+	
+	<select id = "selectByArea" parameterType="com.thinkgem.jeesite.modules.area.entity.XlfArea"  
+	resultType="com.thinkgem.jeesite.modules.area.entity.XlfArea">
+		select * from xlf_area 
+		<where>
+			<if test="province != null and province != ''">
+				province = #{province}
+			</if>
+			<if test="city != null and city != ''">
+				and city = #{city}
+			</if>
+			<if test="district != null and district != ''">
+				and district = #{district}
+			</if>
+		</where>
+	</select>
+</mapper>

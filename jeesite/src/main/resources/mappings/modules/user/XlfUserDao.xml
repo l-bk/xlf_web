@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.user.dao.XlfUserDao">
+    
+	<sql id="xlfUserColumns">
+		a.id AS "userId",
+		a.user_name AS "userName",
+		a.user_sex AS "userSex",
+		a.user_role AS "userRole",
+		a.user_company AS "userCompany",
+		a.user_age AS "userAge",
+		a.user_high AS "userHigh",
+		a.user_school_id AS "userSchoolId",
+		a.user_phone AS "userPhone",
+		a.user_details AS "userDetails",
+		a.user_img AS "userImg",
+		a.user_weigh AS "userWeigh",
+		s.school_name AS schoolName
+	</sql>
+	
+	<sql id="xlfUserJoins">
+		left join xlf_school s
+		on a.user_school_id = s.id
+	</sql>
+    
+	<select id="get" resultType="XlfUser">
+		SELECT 
+			<include refid="xlfUserColumns"/>
+		FROM xlf_user a
+		<include refid="xlfUserJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="XlfUser">
+		SELECT 
+			<include refid="xlfUserColumns"/>
+		FROM xlf_user a
+		<include refid="xlfUserJoins"/>
+		<where>
+			a.id  != '10001'
+			<if test="userName != null">
+				a.user_name = #{userName}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="XlfUser">
+		SELECT 
+			<include refid="xlfUserColumns"/>
+		FROM xlf_user a
+		<include refid="xlfUserJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO xlf_user(
+			id,
+			user_name,
+			user_sex,
+			user_role,
+			user_company,
+			user_age,
+			user_high,
+			user_school_id,
+			user_phone,
+			user_details,
+			user_img,
+			user_weigh
+		) VALUES (
+			#{id},
+			#{userName},
+			#{userSex},
+			#{userRole},
+			#{userCompany},
+			#{userAge},
+			#{userHigh},
+			#{userSchoolId},
+			#{userPhone},
+			#{userDetails},
+			#{userImg},
+			#{userWeigh}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE xlf_user SET 	
+			user_name = #{userName},
+			user_sex = #{userSex},
+			user_role = #{userRole},
+			user_company = #{userCompany},
+			user_age = #{userAge},
+			user_high = #{userHigh},
+			user_school_id = #{userSchoolId},
+			user_phone = #{userPhone},
+			user_details = #{userDetails},
+			user_img = #{userImg},
+			user_weigh = #{userWeigh}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM xlf_user
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
