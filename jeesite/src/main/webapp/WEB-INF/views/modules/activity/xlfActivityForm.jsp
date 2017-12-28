@@ -40,6 +40,7 @@
 				//审核通过单击事件
 				$("#updateStatus").click(
 					function(){
+						/* +"&endTime="+${xlfActivity.endTime}.Format("yyyy-MM-dd HH:mm:ss") */
 						window.location.href="${ctx}/activity/xlfActivity/updateStatus?actId=${xlfActivity.actId}&status=1&name=${xlfActivity.name}";
 					}		
 				);
@@ -62,6 +63,7 @@
 				<shiro:lacksPermission name="activity:xlfActivity:edit">查看</shiro:lacksPermission></a></li>
 	</ul>
 	<br />
+	<sys:message content="${message}"/>
 	<form:form id="inputForm" modelAttribute="xlfActivity"
 		action="${ctx}/activity/xlfActivity/save" method="post"
 		class="form-horizontal">

@@ -154,7 +154,8 @@
 				#{ifSchool},
 			</if>
 			<if test="pic != null and pic != ''">
-				 CONCAT('https://www.xianlaifeng.com',#{pic}),
+				<!--  CONCAT('https://www.xianlaifeng.com',#{pic}), -->
+				#{pic},
 			</if>
 			<if test="province != null and province != ''">
 				#{province},
