@@ -33,7 +33,7 @@
 			<form:option  htmlEscape="false" value="" label="&nbsp;请选择 "/>
 			<form:option  htmlEscape="false" value="0" label="未审核 " />
 			<form:option  htmlEscape="false" value="1" label="审核通过"/>
-			<form:option  htmlEscape="false" value="2" label= " 取消  "/>
+			<form:option  htmlEscape="false" value="2" label= " 已下架 "/>
 		</form:select>
 		&nbsp;&nbsp;<input id="btnSubmit" class="btn btn-primary" type="submit" value="查询" />
 		&nbsp;&nbsp;<input id="btnCancel" class="btn btn-primary" type="button" value="返回"  onclick="history.go(-1)"/>
@@ -101,7 +101,7 @@
 					</c:if> <c:if test="${xlfJoin.status == '1'}">
 						审核通过
 					</c:if> <c:if test="${xlfJoin.status == '2'}">
-						取消
+						审核不通过
 					</c:if></td>
 					<shiro:hasPermission name="join:xlfJoin:edit">
 						<td><a href="${ctx}/join/xlfJoin/updateStatus?joinId=${xlfJoin.joinId}&status=1">通过</a>

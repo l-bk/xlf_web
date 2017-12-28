@@ -37,8 +37,14 @@
 
 	<select id="get" resultType="XlfPartTimeJob">
 		SELECT
-		*
+		a.*,u.user_name as userName,u.user_company as userCompany,
+		u.user_role AS userRole,s.school_name AS schoolName, 
+		u.user_phone as userPhone
 		FROM xlf_part_time_job a
+		left join xlf_user u
+		on a.user_id = u.id
+		left join xlf_school s
+		on u.user_school_id = s.id
 		WHERE job_id = #{jobId}
 	</select>
 

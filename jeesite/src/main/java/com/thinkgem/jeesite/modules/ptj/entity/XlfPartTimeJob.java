@@ -260,6 +260,7 @@ public class XlfPartTimeJob extends DataEntity<XlfPartTimeJob> {
 	private String userName;
 	private String userCompany;
 	private String userRole;
+	private String userPhone;
 	private String schoolName;
 	private String jobType;
 	private String area;
@@ -269,6 +270,14 @@ public class XlfPartTimeJob extends DataEntity<XlfPartTimeJob> {
 
 
 	
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
 
 	public String getSchoolName() {
 		return schoolName;

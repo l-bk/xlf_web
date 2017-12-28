@@ -218,6 +218,46 @@ public class XlfActivity extends DataEntity<XlfActivity> {
 	private Integer applySumNum;  //报名总人数
 	private Integer applyUncheck;	//报名未审核人数
 
+	private String userPhone;
+	private String userRole;
+	private String schoolName;
+	private String userCompany;
+	
+	
+	
+	
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+	public String getSchoolName() {
+		return schoolName;
+	}
+
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
+
+	public String getUserCompany() {
+		return userCompany;
+	}
+
+	public void setUserCompany(String userCompany) {
+		this.userCompany = userCompany;
+	}
+
 	public Integer getApplySumNum() {
 		return applySumNum;
 	}

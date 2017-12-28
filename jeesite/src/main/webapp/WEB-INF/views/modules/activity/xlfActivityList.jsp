@@ -61,11 +61,12 @@
 						审核通过
 					</c:if>
 					<c:if test="${xlfActivity.status =='2' }">
-						结束报名
+						已下架
 					</c:if>
 				</td>
 				<shiro:hasPermission name="activity:xlfActivity:edit"><td>
-					<c:if test="${xlfActivity.createUser == '10001'}">
+					<a href="${ctx }/activity/xlfActivity/form?actId=${xlfActivity.actId}">查看详情</a>
+					<%-- <c:if test="${xlfActivity.createUser == '10001'}">
 	    				<a href="${ctx}/activity/xlfActivity/form?actId=${xlfActivity.actId}">修改</a>
 						<a href="${ctx}/activity/xlfActivity/delete?actId=${xlfActivity.actId}" onclick="return confirmx('确认要删除该活动信息管理吗？', this.href)">删除</a>
 						<a href="${ctx}/activity/xlfActivity/updateStatus?actId=${xlfActivity.actId}&status=2&name=${xlfActivity.name}">取消</a>
@@ -81,7 +82,7 @@
 						<c:if test="${xlfActivity.status == '2' }">
 							<a href="${ctx}/activity/xlfActivity/updateStatus?actId=${xlfActivity.actId}&status=0&name=${xlfActivity.name}"></a>
 						</c:if>
-					</c:if>
+					</c:if> --%>
 				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>

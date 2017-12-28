@@ -86,7 +86,7 @@ public class XlfPartTimeJobController extends BaseController {
 		}else {
 			 typeList=typeService.findList(new XlfPtjType());
 		}
-		model.addAttribute("typeList",typeList);
+		model.addAttribute("typeList",typeList);//兼职类型
 		model.addAttribute("xlfPartTimeJob", xlfPartTimeJob);
 		return "modules/ptj/xlfPartTimeJobForm";
 	}
@@ -126,12 +126,6 @@ public class XlfPartTimeJobController extends BaseController {
 				addMessage(redirectAttributes, xlfPartTimeJob.getJobName()+"审核不通过操作成功");
 			}else {
 				addMessage(redirectAttributes, xlfPartTimeJob.getJobName()+"审核不通过操作不成功");
-			}
-		}else if ("0".equals(xlfPartTimeJob.getAuditStatus())) {
-			if(result == 1 ) {
-				addMessage(redirectAttributes, xlfPartTimeJob.getJobName()+"重新审核操作成功");
-			}else {
-				addMessage(redirectAttributes, xlfPartTimeJob.getJobName()+"重新审核操作不成功");
 			}
 		}
 		return "redirect:"+Global.getAdminPath()+"/ptj/xlfPartTimeJob/?repage";

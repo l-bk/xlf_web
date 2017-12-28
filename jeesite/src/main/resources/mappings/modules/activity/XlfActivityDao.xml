@@ -263,9 +263,16 @@
 
 	<select id="selectByActId" resultMap="BaseResultMap">
 		SELECT a.id as actId,
+		s.school_name as schoolName,
+		u.user_name as userName,u.user_company as userCompany,
+		u.user_role as userRole,u.user_phone as userPhone,
 		<include refid="Base_Column_List" />
 		FROM xlf_activity a
-		where id = #{actId}
+		left join xlf_user u
+		on a.activityCreateUser = u.id
+		left join xlf_school s
+		on u.user_school_id = s.id
+		where a.id = #{actId}
 	</select>
 
 	<update id ="updateStatus" parameterType="com.thinkgem.jeesite.modules.activity.entity.XlfActivity">

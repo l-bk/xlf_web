@@ -71,13 +71,15 @@
 						审核通过
 					</c:if>
 					<c:if test="${xlfPartTimeJob.auditStatus =='2' }">
-						已取消
+						已下架
 					</c:if>
 				</td>
 				<shiro:hasPermission name="ptj:xlfPartTimeJob:edit"><td>
-				<c:if test="${xlfPartTimeJob.userId == '10001'}">
-    				<a href="${ctx}/ptj/xlfPartTimeJob/form?jobId=${xlfPartTimeJob.jobId}">修改</a>
-					<a href="${ctx}/ptj/xlfPartTimeJob/delete?jobId=${xlfPartTimeJob.jobId}" onclick="return confirmx('确认要删除该兼职信息吗？', this.href)">删除</a>
+					&nbsp;<a href="${ctx}/ptj/xlfPartTimeJob/form?jobId=${xlfPartTimeJob.jobId}&userId=${xlfPartTimeJob.userId}">查看详情</a>
+				<%--
+				 <c:if test="${xlfPartTimeJob.userId == '10001'}">
+    				&nbsp;<a href="${ctx}/ptj/xlfPartTimeJob/form?jobId=${xlfPartTimeJob.jobId}">修改</a>
+					&nbsp;<a href="${ctx}/ptj/xlfPartTimeJob/delete?jobId=${xlfPartTimeJob.jobId}" onclick="return confirmx('确认要删除该兼职信息吗？', this.href)">删除</a>
 					<a href="${ctx}/ptj/xlfPartTimeJob/updateStatus?jobId=${xlfPartTimeJob.jobId}&auditStatus=0&jobName=${xlfPartTimeJob.jobName}">取消</a>
 				</c:if>
 				<c:if test="${xlfPartTimeJob.userId != '10001'}">
@@ -91,7 +93,7 @@
 						<c:if test="${xlfPartTimeJob.auditStatus  == '2' }">
 							<a href="${ctx}/ptj/xlfPartTimeJob/updateStatus?jobId=${xlfPartTimeJob.jobId}&auditStatus=0&jobName=${xlfPartTimeJob.jobName}"></a>
 						</c:if>
-				</c:if>
+				</c:if> --%>
 				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>

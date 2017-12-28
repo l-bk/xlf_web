@@ -55,7 +55,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">区首字母大写：</label>
+			<label class="control-label">市首字母大写：</label>
 			<div class="controls">
 				<form:input path="cityFirst" htmlEscape="false" maxlength="2" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
