@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.pic.dao.XlfActPicTypeDao">
+    
+	<sql id="xlfActPicTypeColumns">
+		a.id AS "picTypeId",
+		a.typename AS "picTypeName"
+	</sql>
+	
+	<sql id="xlfActPicTypeJoins">
+	</sql>
+    
+	<select id="get" resultType="XlfActPicType">
+		SELECT 
+			<include refid="xlfActPicTypeColumns"/>
+		FROM xlf_act_pic_type a
+		<include refid="xlfActPicTypeJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="XlfActPicType">
+		SELECT 
+			<include refid="xlfActPicTypeColumns"/>
+		FROM xlf_act_pic_type a
+		<include refid="xlfActPicTypeJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="XlfActPicType">
+		SELECT 
+			<include refid="xlfActPicTypeColumns"/>
+		FROM xlf_act_pic_type a
+		<include refid="xlfActPicTypeJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO xlf_act_pic_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="picTypeName != null and picTypeName != ''">
+				typeName,
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="picTypeName != null and picTypeName != ''">
+				#{picTypeName},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="update">
+		UPDATE xlf_act_pic_type 
+		<set>
+			<if test="picTypeName != null and picTypeName != ''">
+				typeName = #{picTypeName},
+			</if>
+		</set>
+		WHERE id = #{picTypeId}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM xlf_act_pic_type
+		WHERE id = #{picTypeId}
+	</update>
+	
+</mapper>

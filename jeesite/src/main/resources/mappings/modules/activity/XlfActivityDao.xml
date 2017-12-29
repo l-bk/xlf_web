@@ -34,7 +34,8 @@
 		a.activityCity AS city,a.activityDistrict AS district,
 		a.activityLocation AS location,a.activityLatitude AS latitude,
 		a.activityLongitude AS longitude,a.activityPerson AS person,
-		a.activityStartTime AS startTime, a.activityEndTime AS endTime,
+		a.activityStartTime AS startTime, 
+		DATE_FORMAT(a.activityEndTime,'%Y-%d-%m %T') AS endTime,
 		a.activityCreateTime AS createTime ,a.activityCreateUser AS createUser,
 		a.activityStatus AS status,a.activityDoor AS door
 	</sql>
