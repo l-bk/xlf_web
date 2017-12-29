@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.pic.dao.XlfActPicDao">
+    
+	<sql id="xlfActPicColumns">
+		a.id AS "id",
+		a.picname AS "picname",
+		a.pictype AS "pictype"
+	</sql>
+	
+	<sql id="xlfActPicJoins">
+	</sql>
+    
+	<select id="get" resultType="XlfActPic">
+		SELECT 
+			<include refid="xlfActPicColumns"/>
+		FROM xlf_act_pic a
+		<include refid="xlfActPicJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="XlfActPic">
+		SELECT 
+			<include refid="xlfActPicColumns"/>
+		FROM xlf_act_pic a
+		<include refid="xlfActPicJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="XlfActPic">
+		SELECT 
+			<include refid="xlfActPicColumns"/>
+		FROM xlf_act_pic a
+		<include refid="xlfActPicJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO xlf_act_pic(
+			id,
+			picname,
+			pictype
+		) VALUES (
+			#{id},
+			#{picname},
+			#{pictype}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE xlf_act_pic SET 	
+			picname = #{picname},
+			pictype = #{pictype}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM xlf_act_pic
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

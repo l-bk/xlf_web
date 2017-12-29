@@ -36,7 +36,6 @@
 				if(newActId == '10001' || newActId.length == '0'){
 					$(".input-xlarge,.input-medium").attr("disabled",false);
 				};
-				
 				//审核通过单击事件
 				$("#updateStatus").click(
 					function(){
