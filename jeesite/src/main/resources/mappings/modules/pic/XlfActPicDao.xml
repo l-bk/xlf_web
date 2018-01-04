@@ -3,9 +3,9 @@
 <mapper namespace="com.thinkgem.jeesite.modules.pic.dao.XlfActPicDao">
     
 	<sql id="xlfActPicColumns">
-		a.id AS "id",
-		a.picname AS "picname",
-		a.pictype AS "pictype"
+		a.id AS "picId",
+		a.picname AS "name",
+		a.pictype AS "type"
 	</sql>
 	
 	<sql id="xlfActPicJoins">
@@ -16,16 +16,19 @@
 			<include refid="xlfActPicColumns"/>
 		FROM xlf_act_pic a
 		<include refid="xlfActPicJoins"/>
-		WHERE a.id = #{id}
+		WHERE a.id = #{picId}
 	</select>
 	
 	<select id="findList" resultType="XlfActPic">
-		SELECT 
+		SELECT t.typeName as typeName,
 			<include refid="xlfActPicColumns"/>
 		FROM xlf_act_pic a
-		<include refid="xlfActPicJoins"/>
+		left join xlf_act_pic_type t
+		on a.picType = t.id
 		<where>
-			
+			<if test="type != null and type != ''">
+				a.picType = #{type}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -54,27 +57,41 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO xlf_act_pic(
-			id,
-			picname,
-			pictype
-		) VALUES (
-			#{id},
-			#{picname},
-			#{pictype}
-		)
+		INSERT INTO xlf_act_pic
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null and name != ''">
+				picName,
+			</if>
+			<if test="type != null and type != ''">
+				picType,
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="name != null and name != ''">
+				#{name},
+			</if>
+			<if test="type != null and type != ''">
+				#{type},
+			</if>
+		</trim>
 	</insert>
 	
 	<update id="update">
-		UPDATE xlf_act_pic SET 	
-			picname = #{picname},
-			pictype = #{pictype}
-		WHERE id = #{id}
+		UPDATE xlf_act_pic 
+		<set>
+			<if test="name != null and name != ''">
+				picName = #{name},
+			</if>
+			<if test="type != null and type != ''">
+				picType = #{type},
+			</if>
+		</set> 	
+		WHERE id = #{picId}
 	</update>
 	
 	<update id="delete">
 		DELETE FROM xlf_act_pic
-		WHERE id = #{id}
+		WHERE id = #{picId}
 	</update>
 	
 </mapper>

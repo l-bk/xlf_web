@@ -32,7 +32,6 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-			<th><id></id>
 				<th>活动名称</th>
 				<th>创建人</th>
 				<th>活动位置</th>
@@ -46,7 +45,6 @@
 		<tbody>
 		<c:forEach items="${page.list}" var="xlfActivity">
 			<tr>
-				<td>${xlfActivity.createUser}</td>
 				<td>${xlfActivity.name}</td>
 				<td>${xlfActivity.userName}</td>
 				<td>${xlfActivity.address}</td>

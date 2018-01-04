@@ -46,7 +46,7 @@ public class XlfActPicController extends BaseController {
 		return entity;
 	}
 	
-	@RequiresPermissions("pic:xlfActPic:view")
+	@RequiresPermissions("pic:xlfActPicType:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(XlfActPic xlfActPic, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<XlfActPic> page = xlfActPicService.findPage(new Page<XlfActPic>(request, response), xlfActPic); 

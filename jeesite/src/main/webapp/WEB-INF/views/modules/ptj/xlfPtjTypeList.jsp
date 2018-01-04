@@ -33,12 +33,11 @@
 		<form:input path="jobType"  maxlength="50"/>&nbsp;
 		<input id="btnSubmit" class="btn btn-primary"
 				type="submit" value="查询" />
-		</ul>
 	</form:form>
 	<sys:message content="${message}" />
-	<table id="contentTable"
-		class="table table-striped table-bordered table-condensed">
-		<thead>
+	<table id="contentTable"  
+		class="table table-striped table-bordered table-condensed" style="width:60%">
+		<thead >
 			<tr>
 				<th>类型名称</th>
 				<th>操作</th>

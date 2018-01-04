@@ -16,8 +16,8 @@ public class XlfActPic extends DataEntity<XlfActPic> {
 	
 	private static final long serialVersionUID = 1L;
 	private Integer picId; 
-	private String picname;		// 图片名
-	private String pictype;		// pictype
+	private String name;		// 图片名
+	private String type;		// 类型
 	
 	public XlfActPic() {
 		super();
@@ -27,22 +27,21 @@ public class XlfActPic extends DataEntity<XlfActPic> {
 		super(id);
 	}
 
-	@Length(min=0, max=200, message="图片名长度必须介于 0 和 200 之间")
-	public String getPicname() {
-		return picname;
-	}
-
-	public void setPicname(String picname) {
-		this.picname = picname;
-	}
 	
-	@Length(min=0, max=10, message="pictype长度必须介于 0 和 10 之间")
-	public String getPictype() {
-		return pictype;
+	public String getName() {
+		return name;
 	}
 
-	public void setPictype(String pictype) {
-		this.pictype = pictype;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Integer getPicId() {
@@ -52,6 +51,17 @@ public class XlfActPic extends DataEntity<XlfActPic> {
 	public void setPicId(Integer picId) {
 		this.picId = picId;
 	}
+//--------------------------------
+	private String typeName;
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+	
 	
 	
 }

@@ -24,13 +24,10 @@
 	<form:form id="searchForm" modelAttribute="xlfActPic" action="${ctx}/pic/xlfActPic/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-		<ul class="ul-form">
-			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
-			<li class="clearfix"></li>
-		</ul>
+		<!-- <input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/> -->
 	</form:form>
 	<sys:message content="${message}"/>
-	<table id="contentTable" class="table table-striped table-bordered table-condensed">
+	<%-- <table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
 				<shiro:hasPermission name="pic:xlfActPic:edit"><th>操作</th></shiro:hasPermission>
@@ -46,7 +43,17 @@
 			</tr>
 		</c:forEach>
 		</tbody>
-	</table>
+	</table> --%>
+	
+	<div class="container">
+		<div class="row">
+		<c:forEach var="xlfActPic" items="${page.list}">
+			<div class="span4"> 
+				<img src="${xlfActPic.name}"/>
+			</div>
+		</c:forEach> 
+		</div>
+	</div>
 	<div class="pagination">${page}</div>
 </body>
 </html>
