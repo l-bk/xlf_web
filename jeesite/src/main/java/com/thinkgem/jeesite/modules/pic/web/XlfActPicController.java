@@ -3,6 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.pic.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -50,6 +52,9 @@ public class XlfActPicController extends BaseController {
 	@RequestMapping(value = {"list", ""})
 	public String list(XlfActPic xlfActPic, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<XlfActPic> page = xlfActPicService.findPage(new Page<XlfActPic>(request, response), xlfActPic); 
+		List<XlfActPic> list=page.getList();
+		model.addAttribute("typeName",list.get(0).getTypeName());
+		model.addAttribute("typeId",list.get(0).getType());
 		model.addAttribute("page", page);
 		return "modules/pic/xlfActPicList";
 	}

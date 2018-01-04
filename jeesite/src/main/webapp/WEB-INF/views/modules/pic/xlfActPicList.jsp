@@ -18,7 +18,7 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/pic/xlfActPic/">图片信息列表</a></li>
+		<li class="active"><a href="${ctx}/pic/xlfActPic/list?picId=${typeId}">图片信息列表</a></li>
 		<shiro:hasPermission name="pic:xlfActPic:edit"><li><a href="${ctx}/pic/xlfActPic/form">图片信息添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="xlfActPic" action="${ctx}/pic/xlfActPic/" method="post" class="breadcrumb form-search">
@@ -45,6 +45,9 @@
 		</tbody>
 	</table> --%>
 	
+	<div>
+		<label><font size="6" style="letter-spacing:0.5em;margin-left:40px;" > ${typeName}</font></label>
+	</div>
 	<div class="container">
 		<div class="row">
 		<c:forEach var="xlfActPic" items="${page.list}">
