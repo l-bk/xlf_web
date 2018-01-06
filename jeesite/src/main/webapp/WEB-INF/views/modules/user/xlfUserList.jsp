@@ -72,7 +72,6 @@
 						<td>${xlfUser.userCompany}</td>
 					</c:if>
 					<td>${xlfUser.userDetails}</td>
-					<td></td>
 				<shiro:hasPermission name="join:xlfJoin:edit"><td>
     				<a href="${ctx}/join/xlfJoin/joinByModule?user=${xlfUser.userId}&moduleType=1">所报名活动</a>
     				<a href="${ctx}/join/xlfJoin/joinByModule?user=${xlfUser.userId}&moduleType=2">所报名兼职</a>
