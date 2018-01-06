@@ -57,6 +57,9 @@ public class XlfActPicTypeController extends BaseController {
 	@RequiresPermissions("pic:xlfActPicType:view")
 	@RequestMapping(value = "form")
 	public String form(XlfActPicType xlfActPicType, Model model) {
+		if(xlfActPicType.getPicTypeId() != null) {
+			xlfActPicType=xlfActPicTypeService.get(String.valueOf(xlfActPicType.getPicTypeId()));
+		}
 		model.addAttribute("xlfActPicType", xlfActPicType);
 		return "modules/pic/xlfActPicTypeForm";
 	}

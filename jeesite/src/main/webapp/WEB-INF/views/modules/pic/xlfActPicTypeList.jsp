@@ -24,58 +24,35 @@
 		</shiro:hasPermission>
 	</ul>
 	<sys:message content="${message}" />
-	<%-- 
 	<form:form id="searchForm" modelAttribute="xlfActPicType" action="${ctx}/pic/xlfActPicType/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-		<ul class="ul-form">
-			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
-			<li class="clearfix"></li>
-		</ul>
+			<!-- <input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/> -->
 	</form:form>
-	<table id="contentTable" class="table table-striped table-bordered table-condensed">
+	<table id="contentTable" class="table table-striped table-bordered table-condensed" style="width:60%">
 		<thead>
 			<tr>
-				<shiro:hasPermission name="pic:xlfActPicType:edit"><th>操作</th></shiro:hasPermission>
+				<th>图片类型</th>
+				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
 		<c:forEach items="${page.list}" var="xlfActPicType">
 			<tr>
-				<shiro:hasPermission name="pic:xlfActPicType:edit"><td>
-    				<a href="${ctx}/pic/xlfActPicType/form?id=${xlfActPicType.id}">修改</a>
-					<a href="${ctx}/pic/xlfActPicType/delete?id=${xlfActPicType.id}" onclick="return confirmx('确认要删除该图片类型吗？', this.href)">删除</a>
-				</td></shiro:hasPermission>
+				<td>${xlfActPicType.picTypeName}</td>
+				<td>
+				<shiro:hasPermission name="pic:xlfActPicType:view">
+					<a href="${ctx}/pic/xlfActPic/list?type=${xlfActPicType.picTypeId}">查看图片</a>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="pic:xlfActPicType:edit">
+    				<a href="${ctx}/pic/xlfActPicType/form?picTypeId=${xlfActPicType.picTypeId}">修改</a>
+					<a href="${ctx}/pic/xlfActPicType/delete?picTypeId=${xlfActPicType.picTypeId}" onclick="return confirmx('确认要删除该图片类型及对应图片吗？', this.href)">删除</a>
+				</shiro:hasPermission>
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>
 	</table>
-	<div class="pagination">${page}</div> --%>
-
-	<shiro:hasPermission name="pic:xlfActPicType:edit">
-		<div class="row">
-			<c:forEach var="xlfActPicType" items="${page.list}">
-				<ul class="nav-pills nav-stacked ">
-					<li>${xlfActPicType.picTypeName }</li>
-				</ul>
-			</c:forEach>
-		</div>
-
-
-		<div class="row ">
-			<div class="span12">
-				<div class ="container">
-				
-				</div>
-				<div class="row">
-					<div class="span2 offset1">Level 2</div>
-					<div class="span2 offset1">Level 2</div>
-				</div>
-			</div>
-		</div>
-
-
-	</shiro:hasPermission>
-
+	<div class="pagination">${page}</div>
 </body>
 </html>

@@ -28,15 +28,15 @@
 <body>
 	<ul class="nav nav-tabs">
 		<li><a href="${ctx}/pic/xlfActPicType/">图片类型列表</a></li>
-		<li class="active"><a href="${ctx}/pic/xlfActPicType/form?id=${xlfActPicType.id}">图片类型<shiro:hasPermission name="pic:xlfActPicType:edit">${not empty xlfActPicType.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="pic:xlfActPicType:edit">查看</shiro:lacksPermission></a></li>
+		<li class="active"><a href="${ctx}/pic/xlfActPicType/form?picTypeId=${xlfActPicType.picTypeId}">图片类型<shiro:hasPermission name="pic:xlfActPicType:edit">${not empty xlfActPicType.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="pic:xlfActPicType:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="xlfActPicType" action="${ctx}/pic/xlfActPicType/save" method="post" class="form-horizontal">
-		<form:hidden path="id"/>
+		<form:hidden path="picTypeId"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
 			<label class="control-label">图片类型名称：</label>
 			<div class="controls">
-				<form:input path="typename" htmlEscape="false" maxlength="30" class="input-xlarge "/>
+				<form:input path="picTypeName" htmlEscape="false" maxlength="30" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="form-actions">

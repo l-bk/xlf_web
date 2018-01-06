@@ -3,6 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.pic.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,22 +48,26 @@ public class XlfActPicController extends BaseController {
 		return entity;
 	}
 	
-	@RequiresPermissions("pic:xlfActPic:view")
+	@RequiresPermissions("pic:xlfActPicType:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(XlfActPic xlfActPic, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<XlfActPic> page = xlfActPicService.findPage(new Page<XlfActPic>(request, response), xlfActPic); 
+		List<XlfActPic> list=page.getList();
+		model.addAttribute("typeName",list.get(0).getTypeName());
+		model.addAttribute("typeId",list.get(0).getType());
 		model.addAttribute("page", page);
 		return "modules/pic/xlfActPicList";
 	}
 
-	@RequiresPermissions("pic:xlfActPic:view")
+	@RequiresPermissions("pic:xlfActPicType:view")
 	@RequestMapping(value = "form")
 	public String form(XlfActPic xlfActPic, Model model) {
 		model.addAttribute("xlfActPic", xlfActPic);
+		model.addAttribute("typeId",xlfActPic.getType());
 		return "modules/pic/xlfActPicForm";
 	}
 
-	@RequiresPermissions("pic:xlfActPic:edit")
+	@RequiresPermissions("pic:xlfActPicType:view")
 	@RequestMapping(value = "save")
 	public String save(XlfActPic xlfActPic, Model model, RedirectAttributes redirectAttributes) {
 		if (!beanValidator(model, xlfActPic)){
@@ -69,15 +75,15 @@ public class XlfActPicController extends BaseController {
 		}
 		xlfActPicService.save(xlfActPic);
 		addMessage(redirectAttributes, "保存图片信息成功");
-		return "redirect:"+Global.getAdminPath()+"/pic/xlfActPic/?repage";
+		return "redirect:"+Global.getAdminPath()+"/pic/xlfActPic/?type="+xlfActPic.getType()+"&repage";
 	}
 	
-	@RequiresPermissions("pic:xlfActPic:edit")
+	@RequiresPermissions("pic:xlfActPicType:view")
 	@RequestMapping(value = "delete")
 	public String delete(XlfActPic xlfActPic, RedirectAttributes redirectAttributes) {
 		xlfActPicService.delete(xlfActPic);
 		addMessage(redirectAttributes, "删除图片信息成功");
-		return "redirect:"+Global.getAdminPath()+"/pic/xlfActPic/?repage";
+		return "redirect:"+Global.getAdminPath()+"/pic/xlfActPic/?type="+xlfActPic.getType()+"&repage";
 	}
 
 }
