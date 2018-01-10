@@ -14,6 +14,12 @@
 		return false;
 	}
 </script>
+<style>
+	img{
+		width:120px;
+		height:80px;
+	}
+</style>
 </head>
 <body>
 	<ul class="nav nav-tabs">
@@ -47,18 +53,18 @@
 		style="margin-left: 10px; width: 80%">
 		<thead>
 			<tr>
-				<th>图片</th>
-				<th>图片路径</th>
-				<th>操作</th>
+				<th  style="text-align:center;">图片</th>
+				<th  >图片路径</th>
+				<th  style="text-align:center;">操作</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${page.list}" var="xlfActPic">
 				<tr>
-					<td><img src="${xlfActPic.name}" width="100px" height="100px"/></td>
-					<td >${xlfActPic.name}</td>
+					<td  style="text-align:center;"><img src="${xlfActPic.name}" width="100px" height="100px"/></td>
+					<td  >${xlfActPic.name}</td>
 					<shiro:hasPermission name="pic:xlfActPicType:view">
-						<td>
+						<td style="text-align:center;">
 							<%-- <a href="${ctx}/pic/xlfActPic/form?type=${xlfActPic.id}">修改</a> --%>
 							<a href="${ctx}/pic/xlfActPic/delete?picId=${xlfActPic.picId}&type=${typeId}"
 							onclick="return confirmx('确认要删除该图片吗？', this.href)">删除</a>
