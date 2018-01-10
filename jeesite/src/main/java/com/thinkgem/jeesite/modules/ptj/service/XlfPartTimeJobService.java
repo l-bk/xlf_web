@@ -113,6 +113,26 @@ public class XlfPartTimeJobService extends CrudService<XlfPartTimeJobDao, XlfPar
 		if(area != null) {
 			xlfPartTimeJob.setAreaId(area.getAreaId());
 		}
+		
+		if(StringUtils.isNotBlank(xlfPartTimeJob.getWorkProvince())){
+			if(!xlfPartTimeJob.getWorkProvince().endsWith("省")){
+				xlfPartTimeJob.setWorkProvince(xlfPartTimeJob.getWorkProvince()+"省");
+			}
+		}
+		
+		
+		if(StringUtils.isNotBlank(xlfPartTimeJob.getWorkCity())){
+			if(!xlfPartTimeJob.getWorkCity().endsWith("市")){
+				xlfPartTimeJob.setWorkCity(xlfPartTimeJob.getWorkCity()+"市");
+			}
+		}
+		
+		if(StringUtils.isNotBlank(xlfPartTimeJob.getWorkDistrict())){
+			if(!xlfPartTimeJob.getWorkDistrict().endsWith("区")){
+				xlfPartTimeJob.setWorkDistrict(xlfPartTimeJob.getWorkDistrict()+"区");
+			}
+		}
+		
 		xlfPartTimeJob.setUserId(10001);
 		super.save(xlfPartTimeJob);
 	}

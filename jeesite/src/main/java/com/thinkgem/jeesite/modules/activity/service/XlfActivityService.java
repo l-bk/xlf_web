@@ -61,7 +61,8 @@ public class XlfActivityService extends CrudService<XlfActivityDao, XlfActivity>
 //				}
 //			}
 			
-		}else {
+		}
+//		else {
 			//给富文本中的图片拼完整域名
 //			if(StringUtils.isNotBlank(xlfActivity.getDetails())) {
 //				String details=Encodes.unescapeHtml(xlfActivity.getDetails());
@@ -70,7 +71,27 @@ public class XlfActivityService extends CrudService<XlfActivityDao, XlfActivity>
 //					xlfActivity.setDetails(details);
 //				}
 //			}
+//		}
+		
+		
+		if(StringUtils.isNotBlank(xlfActivity.getProvince())){
+			if(!xlfActivity.getProvince().endsWith("省")){
+				xlfActivity.setProvince(xlfActivity.getProvince()+"省");
+			}
 		}
+		
+		if(StringUtils.isNotBlank(xlfActivity.getCity())){
+			if(!xlfActivity.getCity().endsWith("市")){
+				xlfActivity.setCity(xlfActivity.getCity()+"市");
+			}
+		}
+		
+		if(StringUtils.isNotBlank(xlfActivity.getDistrict())){
+			if(!xlfActivity.getDistrict().endsWith("区")){
+				xlfActivity.setDistrict(xlfActivity.getDistrict()+"区");
+			}
+		}
+		
 		xlfActivity.setCreateTime(new Date());
 		xlfActivity.setStatus("1");
 		xlfActivity.setCreateUser(10001);
