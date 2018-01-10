@@ -95,7 +95,7 @@
 			<label class="control-label">活动省份：</label>
 			<div class="controls">
 				<form:input path="province" htmlEscape="false"
-					maxlength="10" class="input-xlarge required" disabled="true"/>
+					maxlength="10" class="input-xlarge required" disabled="true" autocomplete="on"/>
 				<span><font color="red">*</font></span>
 			</div>
 		</div>
@@ -103,7 +103,7 @@
 			<label class="control-label">活动市：</label>
 			<div class="controls">
 				<form:input path="city" htmlEscape="false" maxlength="20"
-					class="input-xlarge required" disabled="true"/>
+					class="input-xlarge required" disabled="true" autocomplete="on"/>
 				<span><font color="red">*</font></span>
 			</div>
 		</div>
@@ -111,7 +111,7 @@
 			<label class="control-label">活动区：</label>
 			<div class="controls">
 				<form:input path="district" htmlEscape="false"
-					maxlength="20" class="input-xlarge required" disabled="true"/>
+					maxlength="20" class="input-xlarge required" disabled="true" autocomplete="on"/>
 				<span><font color="red">*</font></span>
 			</div>
 		</div>
@@ -135,7 +135,7 @@
 			<label class="control-label">纬度：</label>
 			<div class="controls">
 				<form:input path="latitude" htmlEscape="false"
-					class="input-xlarge required" disabled="true"/>
+					class="input-xlarge required" disabled="true" autocomplete="on"/>
 				<span><font color="red">*</font></span>
 			</div>
 		</div>
@@ -143,7 +143,7 @@
 			<label class="control-label">经度：</label>
 			<div class="controls">
 				<form:input path="longitude" htmlEscape="false"
-					class="input-xlarge required" disabled="true"/>
+					class="input-xlarge required" disabled="true" autocomplete="on"/>
 				<span><font color="red">*</font></span>
 			</div>
 		</div>
@@ -151,7 +151,7 @@
 			<label class="control-label">活动人数：</label>
 			<div class="controls">
 				<form:input path="person" htmlEscape="false" maxlength="10"
-					class="input-xlarge " disabled="true"/>
+					class="input-xlarge " disabled="true" autocomplete="on"/>
 			</div>
 		</div>
 		<div class="control-group">

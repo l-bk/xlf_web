@@ -79,7 +79,7 @@
 			<label class="control-label">兼职限定人数：</label>
 			<div class="controls">
 				<form:input path="limitNumber" htmlEscape="false" maxlength="64"
-					class="input-xlarge " disabled="true" />
+					class="input-xlarge " disabled="true" autocomplete="on"/>
 			</div>
 		</div>
 
@@ -120,9 +120,9 @@
 			<label class="control-label">工资单位：</label>
 			<div class="controls">
 				<form:input path="wageType" htmlEscape="false" maxlength="32"
-					class="input-xlarge required" disabled="true" />
-				<span class="help-inline"><font color="red">*</font><font
-					color="gray">例:元/天</font> </span>
+					class="input-xlarge required" disabled="true" placeholder="例：元/天" autocomplete="on" />
+				<!-- <span class="help-inline"><font color="red">*</font><font
+					color="gray">例:元/天</font> </span> -->
 			</div>
 		</div>
 
@@ -145,7 +145,7 @@
 			<label class="control-label">结款日期：</label>
 			<div class="controls">
 				<form:input path="calculateMoneyDate" htmlEscape="false"
-					maxlength="10" class="input-xlarge " disabled="true" />
+					maxlength="10" class="input-xlarge " disabled="true" placeholder="例：2017－01－01" autocomplete="on"/>
 			</div>
 		</div>
 
@@ -181,7 +181,7 @@
 			<label class="control-label">工作省：</label>
 			<div class="controls">
 				<form:input path="workProvince" htmlEscape="false" maxlength="256"
-					class="input-xlarge required" disabled="true" />
+					class="input-xlarge required" disabled="true"  autocomplete="on"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -189,7 +189,7 @@
 			<label class="control-label">工作市：</label>
 			<div class="controls">
 				<form:input path="workCity" htmlEscape="false" maxlength="256"
-					class="input-xlarge required" disabled="true" />
+					class="input-xlarge required" disabled="true" autocomplete="on"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -197,7 +197,7 @@
 			<label class="control-label">工作区：</label>
 			<div class="controls">
 				<form:input path="workDistrict" htmlEscape="false" maxlength="256"
-					class="input-xlarge required" disabled="true" />
+					class="input-xlarge required" disabled="true" autocomplete="on"/>
 				<span class="help-inline"><font color="red">*</font></span>
 			</div>
 		</div>
@@ -239,7 +239,7 @@
 			<label class="control-label">工作时间段：</label>
 			<div class="controls">
 				<form:input path="workTime" htmlEscape="false" maxlength="128"
-					class="input-xlarge required" disabled="true" />
+					class="input-xlarge required" disabled="true" placeholder="例：08:00:00-12:00:00" autocomplete="on"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

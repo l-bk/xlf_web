@@ -13,14 +13,6 @@
 		$("#searchForm").submit();
 		return false;
 	}
-	function addPic(){
-		var type="${typeId}";
-		alert(type);
-		$.ajax({
-			url:"${ctx}/pic/xlfActPic/form?type="+type,
-			success:function(){}
-		});
-	}
 </script>
 </head>
 <body>
@@ -63,8 +55,8 @@
 		<tbody>
 			<c:forEach items="${page.list}" var="xlfActPic">
 				<tr>
-					<td><img src="${xlfActPic.name}" width="100px" height="100px" /></td>
-					<td>${xlfActPic.name}</td>
+					<td><img src="${xlfActPic.name}" width="100px" height="100px"/></td>
+					<td >${xlfActPic.name}</td>
 					<shiro:hasPermission name="pic:xlfActPicType:view">
 						<td>
 							<%-- <a href="${ctx}/pic/xlfActPic/form?type=${xlfActPic.id}">修改</a> --%>
